@@ -1,6 +1,6 @@
-﻿namespace SCRWebAPI_v4.Api.Models.Request;
+﻿using SCRWebAPI_v4.Api.Models.Request;
 
-public class PacienteRequest
+public class PacienteRequest : PessoaRequest
 {
     public string Telefone { get; set; }
     public string Rua { get; set; }

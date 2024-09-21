@@ -36,8 +36,6 @@ namespace Infrastructure.Configuration
 
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            // Register generic repository
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             // Register specific repositories
             services.AddScoped<IPacienteRepository, PacienteRepository>();

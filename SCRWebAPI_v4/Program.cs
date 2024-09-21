@@ -1,5 +1,6 @@
 using Infrastructure.Configuration;
 using Infrastructure.Context;
+using Infrastructure.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Map));
+
 
 // Register infrastructure services
 builder.Services.AddInfrastructure(builder.Configuration);

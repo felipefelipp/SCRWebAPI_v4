@@ -1,7 +1,8 @@
 ﻿namespace SCRWebAPI_v4.Api.Models.Response;
 
-public class PacienteResponse
+public class PacienteResponse : PessoaResponse
 {
+    public int PacienteId { get; set; }
     public string Telefone { get; set; }
     public string Rua { get; set; }
     public int Numero { get; set; }
