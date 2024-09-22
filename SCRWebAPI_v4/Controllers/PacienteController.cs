@@ -9,20 +9,13 @@ namespace SCRWebAPI_v4.Controllers;
 [ApiController]
 public class PacienteController : ControllerBase
 {
-    private readonly ILogger _logger;
     private readonly IPacienteService _pacienteService;
-    private readonly IMapper _mapper;
-    public PacienteController(ILogger<PacienteController> logger,
-                              IPacienteService pacienteService,
-                              IMapper mapper)
+    public PacienteController(IPacienteService pacienteService)
     {
-        _logger = logger;
         _pacienteService = pacienteService;
-        _mapper = mapper;
     }
 
     [HttpGet]
-    //[ServiceFilter(typeof(ApiLoggingFilter))]
     public async Task<IActionResult> ObterPaciente(int? id = null, 
                                                    string? cpf = null,
                                                    string? rg = null,
@@ -30,8 +23,6 @@ public class PacienteController : ControllerBase
                                                    string? email = null,
                                                    string? telefone = null)
     {
-        //_logger.LogInformation("-------------------- GET api/paciente/id ------------------");
-
 
         var result = await _pacienteService.ObterPaciente(id, cpf, rg, celular, email, telefone);
 

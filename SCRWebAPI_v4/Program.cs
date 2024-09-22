@@ -1,12 +1,21 @@
 using Infrastructure.Configuration;
 using Infrastructure.Context;
 using SCRWebAPI_v4.Domain.Mapping;
+using Serilog;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        // Configura o Serilog para usar um arquivo de texto
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.File("Logs/log-data-.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+        
+        builder.Host.UseSerilog();
+
 
         // Add services to the container.
         builder.Services.AddControllers();

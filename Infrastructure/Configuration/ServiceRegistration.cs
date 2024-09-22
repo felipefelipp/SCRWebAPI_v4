@@ -7,6 +7,7 @@ using Infrastructure.Repositories.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SCRWebAPI_v4.Domain.Mapping;
 
 namespace Infrastructure.Configuration
@@ -29,9 +30,8 @@ namespace Infrastructure.Configuration
             // Register application services
             services.AddApplicationServices();
 
-            //Register Filters
-           // services.AddScoped<ApiLoggingFilter>();
-
+            //Register Logging
+            services.AddLogging();
 
             return services;
         }
