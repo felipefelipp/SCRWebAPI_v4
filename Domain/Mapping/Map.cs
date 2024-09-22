@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Infrastructure.Mapping;
+namespace SCRWebAPI_v4.Domain.Mapping;
 
 public class Map : Profile
 {

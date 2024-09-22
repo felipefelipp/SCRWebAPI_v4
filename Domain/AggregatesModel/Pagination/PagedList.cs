@@ -1,4 +1,4 @@
-﻿namespace Api.Pagination;
+﻿namespace SCRWebAPI_v4.Domain.AggregatesModel.Pagination;
 
 public class PagedList<T> : List<T> where T : class
 {

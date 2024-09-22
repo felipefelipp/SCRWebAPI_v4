@@ -5,7 +5,7 @@ using Infrastructure.Context;
 using Infrastructure.Repositories.Interfaces;
 using Infrastructure.Scripts;
 using Microsoft.Data.SqlClient;
-using SCRWebAPI_v4.Domain.AggregatesModel.Parameters;
+using SCRWebAPI_v4.Domain.AggregatesModel.Pagination;
 using System.Data;
 using System.Text;
 using static Dapper.SqlMapper;
@@ -186,7 +186,7 @@ namespace Infrastructure.Repositories.SqlServer
         }
 
 
-        public async Task<List<Paciente>> ObterPacientes(ParametersQuery parameters)
+        public async Task<List<Paciente>> ObterPacientes(Parameters parameters)
         {
             var query = new StringBuilder(PacienteScripts.ObterPacientes);
             using var connection = _context.CreateConnection();

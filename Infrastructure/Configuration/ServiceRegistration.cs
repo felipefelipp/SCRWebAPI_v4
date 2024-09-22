@@ -7,6 +7,7 @@ using Infrastructure.Repositories.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SCRWebAPI_v4.Domain.Mapping;
 
 namespace Infrastructure.Configuration
 {
@@ -23,6 +24,7 @@ namespace Infrastructure.Configuration
 
             // Register AutoMapper
             services.AddAutoMapper(typeof(MappingProfile));
+            services.AddAutoMapper(typeof(Map));
 
             // Register application services
             services.AddApplicationServices();

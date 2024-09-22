@@ -1,22 +1,28 @@
-﻿using Domain.AggregatesModel.Cliente;
+﻿using AutoMapper;
+using Domain.AggregatesModel.Cliente;
 using Domain.Services.Interfaces;
 using Infrastructure.Repositories.Interfaces;
 using SCRWebAPI_v4.Domain.AggregatesModel.Extensions;
-using SCRWebAPI_v4.Domain.AggregatesModel.Parameters;
+using SCRWebAPI_v4.Domain.Dto;
 using SCRWebAPI_v4.Domain.Services;
+using SCRWebAPI_v4.Domain.AggregatesModel.Pagination;
 
 namespace Domain.Services
 {
     public class PacienteService : IPacienteService 
     {
         private readonly IPacienteRepository _pacienteRepository;
-        public PacienteService(IPacienteRepository pacienteRepository)
+        private readonly IMapper _mapper;
+        public PacienteService(IPacienteRepository pacienteRepository, IMapper mapper)
         {
             _pacienteRepository = pacienteRepository;
+            _mapper = mapper;
         }
 
-        public async Task<ServiceResponse<Paciente>> AdicionarPaciente(Paciente paciente)
+        public async Task<ServiceResponse<Paciente>> AdicionarPaciente(PacienteDto pacienteDto)
         {
+            var paciente = _mapper.Map<Paciente>(pacienteDto);
+
             var response = new ServiceResponse<Paciente>();
 
             if (paciente == null)
@@ -42,8 +48,11 @@ namespace Domain.Services
             return response;
         }
 
-        public async Task<ServiceResponse<Paciente>> AtualizarPaciente(Paciente paciente)
+        public async Task<ServiceResponse<Paciente>> AtualizarPaciente(int id, PacienteDto pacienteDto)
         {
+            var paciente = _mapper.Map<Paciente>(pacienteDto);
+            paciente.PacienteId = id;
+
             var response = new ServiceResponse<Paciente>();
 
             if (paciente == null)
@@ -70,34 +79,23 @@ namespace Domain.Services
             return response;
         }
 
-        public async Task<ServiceResponse<Paciente>> ObterPaciente(Paciente paciente)
+        public async Task<ServiceResponse<Paciente>> ObterPaciente(int? id = null,
+                                                                   string? cpf = null,
+                                                                   string? rg = null,
+                                                                   string? celular = null,
+                                                                   string? email = null,
+                                                                   string? telefone = null)
         {
-
             var response = new ServiceResponse<Paciente>();
 
-            if (paciente == null)
+            if (id == null && cpf == null && rg == null && celular == null && email == null && telefone == null)
             {
                 response.Success = false;
-                response.Message = "Paciente não pode ser nulo";
+                response.Message = "É necessário informar algum valor para realizar a busca";
                 return response;
             };
 
-            var pacienteEncontrado = await _pacienteRepository.ObterPaciente(  paciente.PacienteId,
-                                                                               paciente.CPF,
-                                                                               paciente.Nome,
-                                                                               paciente.DataNascimento,
-                                                                               paciente.RG,
-                                                                               paciente.Celular,
-                                                                               paciente.Email,
-                                                                               paciente.Telefone,
-                                                                               paciente.Rua,
-                                                                               paciente.Numero,
-                                                                               paciente.Bairro,
-                                                                               paciente.Municipio,
-                                                                               paciente.UF,
-                                                                               paciente.CEP,
-                                                                               paciente.Sexo,
-                                                                               paciente.Profissao);
+            var pacienteEncontrado = await _pacienteRepository.ObterPaciente(id: id, cpf: cpf, rg: rg, celular: celular, email: email, telefone: telefone);
 
             if (pacienteEncontrado == null)
             {
@@ -108,13 +106,18 @@ namespace Domain.Services
 
             response.Data = pacienteEncontrado;
             response.Success = true;
-            response.Message = "Paciente adicionado com sucesso";
+            response.Message = "Paciente encontrado";
 
             return response;
         }
 
-        public async Task<ServiceResponse<List<Paciente>>> ObterPacientes(ParametersQuery parameters)
+        public async Task<ServiceResponse<List<Paciente>>> ObterPacientes(int pageNumber, int pageSize)
         {
+            var parameters = new Parameters()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
             parameters.CalculateOffSet();
 
             var response = new ServiceResponse<List<Paciente>>();
@@ -122,7 +125,7 @@ namespace Domain.Services
             if (parameters == null)
             {
                 response.Success = false;
-                response.Message = "Os parâmetros para busca dos pacientes não pode ser nullo";
+                response.Message = "Os parâmetros para busca dos pacientes não pode ser nulos";
             }
 
             var pacientes = await _pacienteRepository.ObterPacientes(parameters);

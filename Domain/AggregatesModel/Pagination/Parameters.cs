@@ -1,4 +1,4 @@
-﻿namespace Api.Pagination;
+﻿namespace SCRWebAPI_v4.Domain.AggregatesModel.Pagination;
 
 public class Parameters
 {
@@ -17,4 +17,5 @@ public class Parameters
             _pageSize = value > maxPageSize ? maxPageSize : value;
         }
     }
+    public int OffSet { get; set; }
 }

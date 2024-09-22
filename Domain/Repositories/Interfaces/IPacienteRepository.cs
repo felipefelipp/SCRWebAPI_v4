@@ -1,5 +1,5 @@
 ﻿using Domain.AggregatesModel.Cliente;
-using SCRWebAPI_v4.Domain.AggregatesModel.Parameters;
+using SCRWebAPI_v4.Domain.AggregatesModel.Pagination;
 
 namespace Infrastructure.Repositories.Interfaces
 {
@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories.Interfaces
                                      string? cep = null,
                                      char? sexo = null,
                                      string? profissao = null);
-        Task<List<Paciente>> ObterPacientes(ParametersQuery parameters);
+        Task<List<Paciente>> ObterPacientes(Parameters parameters);
         Task<bool> AtualizarPaciente(Paciente paciente);
     }
 }
