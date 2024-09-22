@@ -1,6 +1,5 @@
 using Infrastructure.Configuration;
 using Infrastructure.Context;
-using SCRWebAPI_v4.Domain.Mapping;
 using Serilog;
 
 internal class Program

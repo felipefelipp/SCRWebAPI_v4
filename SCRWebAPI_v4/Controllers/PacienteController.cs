@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Domain.Services.Interfaces;
+﻿using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using SCRWebAPI_v4.Domain.Dto;
 
@@ -16,7 +15,7 @@ public class PacienteController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> ObterPaciente(int? id = null, 
+    public async Task<IActionResult> ObterPacienteAsync(int? id = null, 
                                                    string? cpf = null,
                                                    string? rg = null,
                                                    string? celular = null,
@@ -24,7 +23,7 @@ public class PacienteController : ControllerBase
                                                    string? telefone = null)
     {
 
-        var result = await _pacienteService.ObterPaciente(id, cpf, rg, celular, email, telefone);
+        var result = await _pacienteService.ObterPacienteAsync(id, cpf, rg, celular, email, telefone);
 
         if (!result.Success)
         {
@@ -40,18 +39,18 @@ public class PacienteController : ControllerBase
     }
 
     [HttpGet("/Pacientes")]
-    public async Task<IActionResult> ObterPacientes([FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<IActionResult> ObterPacientesAsync([FromQuery] int pageNumber, [FromQuery] int pageSize)
     {
-        var result = await _pacienteService.ObterPacientes(pageNumber, pageSize);
+        var result = await _pacienteService.ObterPacientesAsync(pageNumber, pageSize);
  
         return Ok(result);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> AtualizarPaciente(int id, [FromBody] PacienteDto pacienteRequest)
+    public async Task<IActionResult> AtualizarPacienteAsync(int id, [FromBody] PacienteDto pacienteRequest)
     {
         
-        var result = await _pacienteService.AtualizarPaciente(id, pacienteRequest);
+        var result = await _pacienteService.AtualizarPacienteAsync(id, pacienteRequest);
 
         if (!result.Success)
         {
@@ -62,9 +61,9 @@ public class PacienteController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AdicionarPaciente([FromBody] PacienteDto pacienteRequest)
+    public async Task<IActionResult> AdicionarPacienteAsync([FromBody] PacienteDto pacienteRequest)
     {
-        var result = await _pacienteService.AdicionarPaciente(pacienteRequest);
+        var result = await _pacienteService.AdicionarPacienteAsync(pacienteRequest);
 
         if (!result.Success)
         {

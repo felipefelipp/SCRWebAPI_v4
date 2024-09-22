@@ -6,14 +6,14 @@ namespace Domain.Services.Interfaces
 {
     public interface IPacienteService
     {
-        Task<ServiceResponse<Paciente>> ObterPaciente(int? id = null,
+        Task<ServiceResponse<Paciente>> ObterPacienteAsync(int? id = null,
                                                        string? cpf = null,
                                                        string? rg = null,
                                                        string? celular = null,
                                                        string? email = null,
                                                        string? telefone = null);
-        Task<ServiceResponse<Paciente>> AdicionarPaciente(PacienteDto paciente);
-        Task<ServiceResponse<List<Paciente>>> ObterPacientes(int pageNumber, int pageSize);
-        Task<ServiceResponse<Paciente>> AtualizarPaciente(int id, PacienteDto paciente);
+        Task<ServiceResponse<Paciente>> AdicionarPacienteAsync(PacienteDto paciente);
+        Task<ServiceResponse<List<Paciente>>> ObterPacientesAsync(int pageNumber, int pageSize);
+        Task<ServiceResponse<Paciente>> AtualizarPacienteAsync(int id, PacienteDto paciente);
     }
 }

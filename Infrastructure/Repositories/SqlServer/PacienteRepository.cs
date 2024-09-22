@@ -16,15 +16,14 @@ namespace Infrastructure.Repositories.SqlServer
     public class PacienteRepository : IPacienteRepository
     {
         private readonly ILogger<PacienteRepository> _logger;
-        private readonly IMapper _mapper;
         private readonly DapperContext _context;
-        public PacienteRepository(DapperContext context, IMapper mapper)
+        public PacienteRepository(DapperContext context, ILogger<PacienteRepository> logger)
         {
-            _mapper = mapper;
             _context = context;
+            _logger = logger;
         }
 
-        public async Task<Paciente> AdicionarPaciente(Paciente paciente)
+        public async Task<Paciente> AdicionarPacienteAsync(Paciente paciente)
         {
             try
             {
@@ -50,7 +49,7 @@ namespace Infrastructure.Repositories.SqlServer
 
                 await connection.ExecuteAsync(query, parameters);
 
-                var pacienteInserido = await ObterPaciente(cpf: paciente.CPF);
+                var pacienteInserido = await ObterPacienteAsync(cpf: paciente.CPF);
 
                 return pacienteInserido;
             }
@@ -67,7 +66,7 @@ namespace Infrastructure.Repositories.SqlServer
         }
 
 
-        public async Task<Paciente> ObterPaciente(int? id = null,
+        public async Task<Paciente> ObterPacienteAsync(int? id = null,
                                                   string? cpf = null,
                                                   string? nome = null,
                                                   DateTime? dataNascimento = null,
@@ -203,7 +202,7 @@ namespace Infrastructure.Repositories.SqlServer
         }
 
 
-        public async Task<List<Paciente>> ObterPacientes(Parameters parameters)
+        public async Task<List<Paciente>> ObterPacientesAsync(Parameters parameters)
         {
             try
             {
@@ -224,7 +223,7 @@ namespace Infrastructure.Repositories.SqlServer
             }
         }
 
-        public async Task<bool> AtualizarPaciente(Paciente paciente)
+        public async Task<bool> AtualizarPacienteAsync(Paciente paciente)
         {
             try
             {

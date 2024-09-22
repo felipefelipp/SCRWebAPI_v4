@@ -5,8 +5,8 @@ namespace Infrastructure.Repositories.Interfaces
 {
     public interface IPacienteRepository
     {
-        Task<Paciente> AdicionarPaciente(Paciente paciente);
-        Task<Paciente> ObterPaciente(int? id = null,
+        Task<Paciente> AdicionarPacienteAsync(Paciente paciente);
+        Task<Paciente> ObterPacienteAsync(int? id = null,
                                      string? cpf = null,
                                      string? nome = null,
                                      DateTime? dataNascimento = null,
@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories.Interfaces
                                      string? cep = null,
                                      char? sexo = null,
                                      string? profissao = null);
-        Task<List<Paciente>> ObterPacientes(Parameters parameters);
-        Task<bool> AtualizarPaciente(Paciente paciente);
+        Task<List<Paciente>> ObterPacientesAsync(Parameters parameters);
+        Task<bool> AtualizarPacienteAsync(Paciente paciente);
     }
 }

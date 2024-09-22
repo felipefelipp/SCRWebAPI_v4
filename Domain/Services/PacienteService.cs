@@ -19,7 +19,7 @@ namespace Domain.Services
             _mapper = mapper;
         }
 
-        public async Task<ServiceResponse<Paciente>> AdicionarPaciente(PacienteDto pacienteDto)
+        public async Task<ServiceResponse<Paciente>> AdicionarPacienteAsync(PacienteDto pacienteDto)
         {
             var paciente = _mapper.Map<Paciente>(pacienteDto);
 
@@ -32,7 +32,7 @@ namespace Domain.Services
                 return response;
             };
 
-            var pacienteAdd = await _pacienteRepository.AdicionarPaciente(paciente);
+            var pacienteAdd = await _pacienteRepository.AdicionarPacienteAsync(paciente);
 
             if (pacienteAdd == null)
             {
@@ -48,7 +48,7 @@ namespace Domain.Services
             return response;
         }
 
-        public async Task<ServiceResponse<Paciente>> AtualizarPaciente(int id, PacienteDto pacienteDto)
+        public async Task<ServiceResponse<Paciente>> AtualizarPacienteAsync(int id, PacienteDto pacienteDto)
         {
             var paciente = _mapper.Map<Paciente>(pacienteDto);
             paciente.PacienteId = id;
@@ -62,7 +62,7 @@ namespace Domain.Services
                 return response;
             };
 
-            var pacienteFoiAtualizado = await _pacienteRepository.AtualizarPaciente(paciente);
+            var pacienteFoiAtualizado = await _pacienteRepository.AtualizarPacienteAsync(paciente);
 
             if (pacienteFoiAtualizado == false)
             {
@@ -71,7 +71,7 @@ namespace Domain.Services
                 return response;
             };
 
-            var pacienteAtualizado = await _pacienteRepository.ObterPaciente(id: paciente.PacienteId);
+            var pacienteAtualizado = await _pacienteRepository.ObterPacienteAsync(id: paciente.PacienteId);
 
             response.Success = true;
             response.Data = pacienteAtualizado;
@@ -79,7 +79,7 @@ namespace Domain.Services
             return response;
         }
 
-        public async Task<ServiceResponse<Paciente>> ObterPaciente(int? id = null,
+        public async Task<ServiceResponse<Paciente>> ObterPacienteAsync(int? id = null,
                                                                    string? cpf = null,
                                                                    string? rg = null,
                                                                    string? celular = null,
@@ -95,7 +95,7 @@ namespace Domain.Services
                 return response;
             };
 
-            var pacienteEncontrado = await _pacienteRepository.ObterPaciente(id: id, cpf: cpf, rg: rg, celular: celular, email: email, telefone: telefone);
+            var pacienteEncontrado = await _pacienteRepository.ObterPacienteAsync(id: id, cpf: cpf, rg: rg, celular: celular, email: email, telefone: telefone);
 
             if (pacienteEncontrado == null)
             {
@@ -111,7 +111,7 @@ namespace Domain.Services
             return response;
         }
 
-        public async Task<ServiceResponse<List<Paciente>>> ObterPacientes(int pageNumber, int pageSize)
+        public async Task<ServiceResponse<List<Paciente>>> ObterPacientesAsync(int pageNumber, int pageSize)
         {
             var parameters = new Parameters()
             {
@@ -128,7 +128,7 @@ namespace Domain.Services
                 response.Message = "Os parâmetros para busca dos pacientes não pode ser nulos";
             }
 
-            var pacientes = await _pacienteRepository.ObterPacientes(parameters);
+            var pacientes = await _pacienteRepository.ObterPacientesAsync(parameters);
 
             response.Data = pacientes;
             response.Success = true;
