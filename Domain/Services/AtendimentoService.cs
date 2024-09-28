@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Domain.AggregatesModel.Atendimento;
+using Domain.AggregatesModel.Extensions;
+using Infrastructure.Repositories.Interfaces;
 using SCRWebAPI_v4.Domain.AggregatesModel.Extensions;
 using SCRWebAPI_v4.Domain.AggregatesModel.Pagination;
 using SCRWebAPI_v4.Domain.Dto;
@@ -11,16 +13,23 @@ namespace SCRWebAPI_v4.Domain.Services
     public class AtendimentoService : IAtendimentoService
     {
         private readonly IAtendimentoRepository _atendimentoRepository;
+        private readonly IPacienteRepository _pacienteRepository;
         private readonly IMapper _mapper;
-        public AtendimentoService(IAtendimentoRepository atendimentoRepository, IMapper mapper)
+        public AtendimentoService(IAtendimentoRepository atendimentoRepository, IPacienteRepository pacienteRepository, IMapper mapper)
         {
             _atendimentoRepository = atendimentoRepository;
+            _pacienteRepository = pacienteRepository;
             _mapper = mapper;
         }
 
         public async Task<ServiceResponse<AtendimentoPaciente>> AdicionarAtendimentoAsync(AtendimentoDto atendimentoDto)
         {
-            var atendimento = _mapper.Map<AtendimentoPaciente>(atendimentoDto);
+            var atendimento = new AtendimentoPaciente()
+            {
+                PacienteId = atendimentoDto.PacienteId,
+                DataAtendimento = DateTime.Now,
+                SenhaClassificacao = GerarSenha.Sequencia()
+            };
 
             var response = new ServiceResponse<AtendimentoPaciente>();
 
@@ -47,20 +56,29 @@ namespace SCRWebAPI_v4.Domain.Services
             return response;
         }
 
-        public async Task<ServiceResponse<AtendimentoPaciente>> AtualizarIdPacienteAtendimentoAsync(int atendimentoId, AtendimentoDto atendimentoDto)
+        public async Task<ServiceResponse<AtendimentoPaciente>> AtualizarIdPacienteAtendimentoAsync(int atendimentoId, int pacienteId)
         {
-            var atendimento = _mapper.Map<AtendimentoPaciente>(atendimentoDto);
-
             var response = new ServiceResponse<AtendimentoPaciente>();
 
-            if (atendimento.PacienteId < 0)
+            var pacienteEncontrado = await _pacienteRepository.ObterPacienteAsync(pacienteId);
+
+            if (pacienteEncontrado == null)
             {
                 response.Success = false;
-                response.Message = "Atendimento não pode ser menor que 0";
+                response.Message = "Paciente não existe";
                 return response;
             };
 
-            var atendimentoFoiAtualizado = await _atendimentoRepository.AtualizarIdPacienteAtendimentoAsync(atendimento);
+            var atendimentoEncontrado = await _atendimentoRepository.ObterAtendimentoPorIdAsync(atendimentoId);
+
+            if (atendimentoEncontrado == null)
+            {
+                response.Success = false;
+                response.Message = "Atendimento não existe";
+                return response;
+            };
+
+            var atendimentoFoiAtualizado = await _atendimentoRepository.AtualizarIdPacienteAtendimentoAsync(atendimentoId, pacienteId);
 
             if (atendimentoFoiAtualizado == false)
             {
@@ -104,20 +122,19 @@ namespace SCRWebAPI_v4.Domain.Services
             return response;
         }
 
-        public async Task<ServiceResponse<List<AtendimentoPaciente>>> ObterAtendimentosPacienteAsync(AtendimentoDto atendimentoDto)
+        public async Task<ServiceResponse<List<AtendimentoPaciente>>> ObterAtendimentosPacienteAsync(int pacienteId)
         {
-            var atendimento = _mapper.Map<AtendimentoPaciente>(atendimentoDto);
 
             var response = new ServiceResponse<List<AtendimentoPaciente>>();
 
-            if (atendimento.PacienteId < 0)
+            if (pacienteId < 0)
             {
                 response.Success = false;
                 response.Message = "Paciente não pode ser menor que 0";
                 return response;
             };
 
-            var atendimentoEncontrado = await _atendimentoRepository.ObterAtendimentosPacienteAsync(atendimento);
+            var atendimentoEncontrado = await _atendimentoRepository.ObterAtendimentosPacienteAsync(pacienteId);
 
             response.Data = atendimentoEncontrado;
             response.Success = true;

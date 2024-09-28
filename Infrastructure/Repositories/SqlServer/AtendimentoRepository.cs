@@ -8,6 +8,7 @@ using SCRWebAPI_v4.Domain.AggregatesModel.Pagination;
 using SCRWebAPI_v4.Domain.Repositories.Interfaces;
 using SCRWebAPI_v4.Infrastructure.Scripts;
 using System.Data;
+using System.Reflection.Metadata;
 using System.Text;
 
 namespace SCRWebAPI_v4.Infrastructure.Repositories.SqlServer
@@ -34,6 +35,8 @@ namespace SCRWebAPI_v4.Infrastructure.Repositories.SqlServer
                 parameters.Add("DataAtendimento", DateTime.Now, DbType.DateTime);
                 parameters.Add("InseridoPor", 1, DbType.Int16);
                 parameters.Add("InseridoEm", DateTime.Now, DbType.DateTime);
+                parameters.Add("ModificadoEm", DateTime.Now, DbType.DateTime);
+                parameters.Add("ModificadoPor", 1, DbType.Int16);
 
                 var atendimentoPacienteId = await connection.ExecuteScalarAsync<int>(query, parameters);
 
@@ -112,7 +115,7 @@ namespace SCRWebAPI_v4.Infrastructure.Repositories.SqlServer
                 using var connection = _context.CreateConnection();
 
                 var parameters = new DynamicParameters();
-                parameters.Add("PacenteId", idPaciente, DbType.Int32);
+                parameters.Add("PacienteId", idPaciente, DbType.Int32);
 
                 var result = await connection.QueryAsync<AtendimentoPaciente>(query.ToString(), parameters);
 

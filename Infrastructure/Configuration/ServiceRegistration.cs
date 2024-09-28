@@ -7,8 +7,11 @@ using Infrastructure.Repositories.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using SCRWebAPI_v4.Domain.Mapping;
+using SCRWebAPI_v4.Domain.Repositories.Interfaces;
+using SCRWebAPI_v4.Domain.Services;
+using SCRWebAPI_v4.Domain.Services.Interfaces;
+using SCRWebAPI_v4.Infrastructure.Repositories.SqlServer;
 
 namespace Infrastructure.Configuration
 {
@@ -41,9 +44,11 @@ namespace Infrastructure.Configuration
 
             // Register specific repositories
             services.AddScoped<IPacienteRepository, PacienteRepository>();
+            services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
 
             // Register other services here
              services.AddScoped<IPacienteService, PacienteService>();
+             services.AddScoped<IAtendimentoService, AtendimentoService>();
         }
     }
 }

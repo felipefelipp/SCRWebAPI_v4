@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SCRWebAPI_v4.Domain.Services
+﻿namespace SCRWebAPI_v4.Domain.Services
 {
     public class ServiceResponse<T>
     {
