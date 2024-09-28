@@ -1,11 +1,8 @@
 ﻿namespace Domain.AggregatesModel.Classificacao;
 
-public class PerguntaSelecionadaPaciente
+public class PerguntaSelecionada
 {
-    public int PerguntaSelecionadaPacienteId { get; set; }
+    public int PerguntaSelecionadaId { get; set; }
     public int PerguntaId { get; set; }
-    public int PacienteId { get; set; }
     public int ClassificacaoPacienteId { get; set; }
-
-
 }

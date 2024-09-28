@@ -8,7 +8,5 @@ public class Resultado
     public int ValorResultadoClassificacao { get; set; }
     public int ResultadoCor { get; set; }
     public string ResultadoClassificacaoCor { get; set; }
-
-
 }
 

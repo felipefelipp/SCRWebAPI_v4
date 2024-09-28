@@ -4,27 +4,35 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Context.ContextConfiguration;
 
-public class PerguntaSelecionadaPacienteConfiguration : IEntityTypeConfiguration<PerguntaSelecionadaPacienteModel>
+public class RespostaSelecionadaConfiguration : IEntityTypeConfiguration<RespostaSelecionadaModel>
 {
-    public void Configure(EntityTypeBuilder<PerguntaSelecionadaPacienteModel> builder)
+    public void Configure(EntityTypeBuilder<RespostaSelecionadaModel> builder)
     {
         builder
-            .ToTable("PerguntaSelecionadaPaciente");
+            .ToTable("RespostaSelecionada");
 
         builder
-            .HasKey(pspc => pspc.PerguntaSelecionadaPacienteId);
+            .HasKey(rspc => rspc.RespostaSelecionadaId);
 
         builder
-            .Property(pspc => pspc.PerguntaSelecionadaPacienteId)
-            .HasColumnName("PerguntaSelecionadaPacienteId");
+            .Property(rspc => rspc.RespostaSelecionadaId)
+            .HasColumnName("RespostaSelecionadaPacienteId");
 
         builder
-            .Property(pspc => pspc.PerguntaId)
-            .HasColumnName("PerguntaId");
+            .Property(rspc => rspc.ValorRespostaTexto)
+            .HasColumnName("ValorRespostaTexto")
+            .HasColumnType("varchar(100)")
+            .IsRequired(false);
 
         builder
-            .Property(pspc => pspc.ClassificacaoPacienteId)
-            .HasColumnName("ClassificacaoPacienteId");
+            .Property(rspc => rspc.ValorRespostaTextoArea)
+            .HasColumnName("ValorRespostaTextoArea")
+            .HasColumnType("varchar(max)")
+            .IsRequired(false);
+
+        builder
+             .Property(rspc => rspc.ClassificacaoPacienteId)
+             .HasColumnName("ClassificacaoPacienteId");
 
         builder
            .Property<DateTime>("InseridoEm")
@@ -46,4 +54,5 @@ public class PerguntaSelecionadaPacienteConfiguration : IEntityTypeConfiguration
             .HasColumnType("int")
             .HasDefaultValueSql("1"); //Implementar usuário que modificou 
     }
+
 }
