@@ -8,7 +8,6 @@ using SCRWebAPI_v4.Domain.AggregatesModel.Pagination;
 using SCRWebAPI_v4.Domain.Repositories.Interfaces;
 using SCRWebAPI_v4.Infrastructure.Scripts;
 using System.Data;
-using System.Reflection.Metadata;
 using System.Text;
 
 namespace SCRWebAPI_v4.Infrastructure.Repositories.SqlServer

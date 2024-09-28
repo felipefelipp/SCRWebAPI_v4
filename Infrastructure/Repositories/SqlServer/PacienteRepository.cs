@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Dapper;
+﻿using Dapper;
 using Domain.AggregatesModel.Cliente;
 using Infrastructure.Context;
 using Infrastructure.Repositories.Interfaces;
@@ -47,11 +46,9 @@ namespace Infrastructure.Repositories.SqlServer
                 parameters.Add("Sexo", paciente.Sexo, DbType.String);
                 parameters.Add("Profissao", paciente.Profissao, DbType.String);
 
-                await connection.ExecuteAsync(query, parameters);
+                var pacienteInserido = await connection.ExecuteScalarAsync<int>(query, parameters);
 
-                var pacienteInserido = await ObterPacienteAsync(cpf: paciente.CPF);
-
-                return pacienteInserido;
+                return await ObterPacienteAsync(id: pacienteInserido);
             }
             catch (SqlException ex)
             {

@@ -1,6 +1,4 @@
-﻿using Domain.AggregatesModel.Extensions;
-
-namespace Domain.AggregatesModel.Atendimento;
+﻿namespace Domain.AggregatesModel.Atendimento;
 
 public class AtendimentoPaciente
 {

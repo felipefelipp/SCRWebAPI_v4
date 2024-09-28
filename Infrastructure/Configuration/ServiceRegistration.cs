@@ -1,7 +1,6 @@
 ﻿using Domain.Services;
 using Domain.Services.Interfaces;
 using Infrastructure.Context;
-using Infrastructure.Mapping;
 using Infrastructure.Repositories.Interfaces;
 using Infrastructure.Repositories.SqlServer;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +26,6 @@ namespace Infrastructure.Configuration
             services.AddScoped<DapperContext>();
 
             // Register AutoMapper
-            services.AddAutoMapper(typeof(MappingProfile));
             services.AddAutoMapper(typeof(Map));
 
             // Register application services
@@ -45,10 +43,12 @@ namespace Infrastructure.Configuration
             // Register specific repositories
             services.AddScoped<IPacienteRepository, PacienteRepository>();
             services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
+            services.AddScoped<IPerguntaRepository, PerguntaRepository>();
 
             // Register other services here
-             services.AddScoped<IPacienteService, PacienteService>();
-             services.AddScoped<IAtendimentoService, AtendimentoService>();
+            services.AddScoped<IPacienteService, PacienteService>();
+            services.AddScoped<IAtendimentoService, AtendimentoService>();
+            services.AddScoped<IPerguntaService, PerguntaService>();
         }
     }
 }
