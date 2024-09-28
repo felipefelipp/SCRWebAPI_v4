@@ -9,4 +9,5 @@ public abstract class RespostaDto
     public string RespostaRadioButtom { get; set; }
     public DateTime? RespostaData { get; set; }
     public int ValorResposta { get; set; } // Pontuação da resposta
+    public int? IdPergunta { get; set; }
 }

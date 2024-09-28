@@ -12,6 +12,6 @@
         public int ValorTipoResposta { get; set; } // Tipo da resposta 
         public string TipoResposta { get; set; }
         public int ValorResposta { get; set; } // Pontuação da resposta
-
+        public int? IdPergunta { get; set; }
     }
 }

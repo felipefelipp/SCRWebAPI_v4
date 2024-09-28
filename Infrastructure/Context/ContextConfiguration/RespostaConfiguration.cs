@@ -60,6 +60,11 @@ public class RespostaConfiguration : IEntityTypeConfiguration<RespostaModel>
             .Ignore(r => r.TipoResposta);
 
         builder
+            .Property(r => r.IdPergunta)
+            .HasColumnName("IdPergunta")
+            .IsRequired(false);
+
+        builder
            .Property<DateTime>("InseridoEm")
            .HasColumnType("datetime")
            .HasDefaultValueSql("getdate()");
