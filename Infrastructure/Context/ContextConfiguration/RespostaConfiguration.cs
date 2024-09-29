@@ -21,43 +21,50 @@ public class RespostaConfiguration : IEntityTypeConfiguration<RespostaModel>
         builder
             .Property(r => r.RespostaTexto)
             .HasColumnName("RespostaTexto")
-            .HasColumnType("bit");
+            .HasColumnType("varchar(50)")
+            .IsRequired(false);
 
         builder
             .Property(r => r.RespostaTextoArea)
             .HasColumnName("RespostaTextoArea")
-            .HasColumnType("bit");
+            .HasColumnType("varchar(1000)")
+            .IsRequired(false);
+
 
         builder
             .Property(r => r.RespostaCheckBox)
             .HasColumnName("RespostaCheckBox")
-            .HasColumnType("varchar(100)");
+            .HasColumnType("varchar(100)")
+            .IsRequired(false);
 
         builder
             .Property(r => r.RespostaComboBox)
             .HasColumnName("RespostaComboBox")
-            .HasColumnType("varchar(100)");
+            .HasColumnType("varchar(100)")
+            .IsRequired(false);
 
         builder
             .Property(r => r.RespostaRadioButtom)
             .HasColumnName("RespostaRadioButtom")
-            .HasColumnType("varchar(100)");
+            .HasColumnType("varchar(100)")
+            .IsRequired(false);
 
         builder
-            .Property(r => r.RespostaData)
-            .HasColumnName("RespostaData")
-            .HasColumnType("Datetime");
+            .Property(r => r.RespostaDateTime)
+            .HasColumnName("RespostaDateTime")
+            .HasColumnType("Datetime")
+            .IsRequired(false);
 
         builder
-            .Property(r => r.ValorTipoResposta)
-            .HasColumnName("ValorTipoResposta");
+            .Property(r => r.RespostaNumeric)
+            .HasColumnName("RespostaNumeric")
+            .HasColumnType("int")
+            .IsRequired(false);
 
         builder
-            .Property(r => r.ValorResposta)
-            .HasColumnName("ValorResposta");
-
-        builder
-            .Ignore(r => r.TipoResposta);
+            .Property(r => r.PontuacaoResposta)
+            .HasColumnName("PontuacaoResposta")
+            .IsRequired(false);
 
         builder
             .Property(r => r.IdPergunta)
