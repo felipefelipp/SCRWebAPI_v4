@@ -63,13 +63,6 @@ namespace SCRWebAPI_v4.Infrastructure.Repositories.SqlServer
                     parameters.Add("RespostaRadioButtom", resposta.RespostaRadioButtom, DbType.String);
                 }
 
-                if (resposta.RespostaDateTime.HasValue)
-                {
-                    insertFields.Add("RespostaDateTime");
-                    insertValues.Add("@RespostaDateTime");
-                    parameters.Add("RespostaDateTime", resposta.RespostaDateTime, DbType.DateTime);
-                }
-
                 if (resposta.RespostaNumeric.HasValue)
                 {
                     insertFields.Add("RespostaNumeric");
@@ -151,12 +144,6 @@ namespace SCRWebAPI_v4.Infrastructure.Repositories.SqlServer
                 {
                     updateFields.Add(" RespostaRadioButtom = @RespostaRadioButtom");
                     parameters.Add("RespostaRadioButtom", resposta.RespostaRadioButtom, DbType.String);
-                }
-
-                if (resposta.RespostaDateTime.HasValue)
-                {
-                    updateFields.Add(" RespostaDateTime = @RespostaDateTime");
-                    parameters.Add("RespostaDateTime", resposta.RespostaDateTime, DbType.DateTime);
                 }
 
                 if (resposta.RespostaNumeric.HasValue)

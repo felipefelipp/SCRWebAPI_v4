@@ -8,7 +8,6 @@
         public string? RespostaCheckBox { get; set; }
         public string? RespostaComboBox { get; set; }
         public string? RespostaRadioButtom { get; set; }
-        public DateTime? RespostaDateTime { get; set; }
         public int? RespostaNumeric { get; set; }
         public int? PontuacaoResposta { get; set; } // Pontuação da resposta
         public int? IdPergunta { get; set; }

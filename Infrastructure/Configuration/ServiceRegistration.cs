@@ -45,12 +45,14 @@ namespace Infrastructure.Configuration
             services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
             services.AddScoped<IPerguntaRepository, PerguntaRepository>();
             services.AddScoped<IRespostaRepository, RespostaRepository>();
+            services.AddScoped<IRespostaSelecionadaRepository, RespostaSelecionadaRepository>();
 
             // Register other services here
             services.AddScoped<IPacienteService, PacienteService>();
             services.AddScoped<IAtendimentoService, AtendimentoService>();
             services.AddScoped<IPerguntaService, PerguntaService>();
             services.AddScoped<IRespostaService, RespostaService>();
+            services.AddScoped<IRespostaSelecionadaService, RespostaSelecionadaService>();
         }
     }
 }

@@ -50,12 +50,6 @@ public class RespostaConfiguration : IEntityTypeConfiguration<RespostaModel>
             .IsRequired(false);
 
         builder
-            .Property(r => r.RespostaDateTime)
-            .HasColumnName("RespostaDateTime")
-            .HasColumnType("Datetime")
-            .IsRequired(false);
-
-        builder
             .Property(r => r.RespostaNumeric)
             .HasColumnName("RespostaNumeric")
             .HasColumnType("int")

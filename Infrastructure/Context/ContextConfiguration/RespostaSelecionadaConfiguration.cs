@@ -16,7 +16,7 @@ public class RespostaSelecionadaConfiguration : IEntityTypeConfiguration<Respost
 
         builder
             .Property(rspc => rspc.RespostaSelecionadaId)
-            .HasColumnName("RespostaSelecionadaPacienteId");
+            .HasColumnName("RespostaSelecionadaId");
 
         builder
             .Property(rspc => rspc.ValorRespostaTexto)
@@ -28,6 +28,12 @@ public class RespostaSelecionadaConfiguration : IEntityTypeConfiguration<Respost
             .Property(rspc => rspc.ValorRespostaTextoArea)
             .HasColumnName("ValorRespostaTextoArea")
             .HasColumnType("varchar(max)")
+            .IsRequired(false);
+
+        builder
+            .Property(r => r.RespostaDateTime)
+            .HasColumnName("RespostaDateTime")
+            .HasColumnType("Datetime")
             .IsRequired(false);
 
         builder
